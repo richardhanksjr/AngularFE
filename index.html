@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>TODOs</title>
+</head>
+  <script src="angular.min.js"></script>
+  <script src="angular.js"></script>
+  <link rel = "stylesheet" href = "bootstrap.min.css">
+
+<style type = "text/css">
+  .green{
+    color: green;
+  }
+  .red{
+    color: red;
+  }
+
+</style>
+
+<body ng-controller = "todosController">
+<div class = "container">
+  <div class = "row text-center">
+    <h1 class = "jumbotron" ng-class = "remainingColor">TODOs {{completedTasks()}}</h1>
+  </div>
+  <div class = "row text-center">
+    <input type = "text" ng-model = "taskName" placeholder = "New Task">
+    <button ng-click = "createNewTask(taskName)">Add New Task</button>
+  </div>  
+  <table class = "table">
+    <tr>
+      <th>Todo</th>
+      <th>Mark</th>
+      <th>Done?</th>
+    </tr>
+    <tr ng-repeat = "todo in todos">
+      <input type = "hidden" name = "href" value = '{{todo._links.self.href}}'>
+      <td><input type = "text" name = "task" value = '{{todo.task}}' ng-model = 'todo.task'</td>
+       <td><input type = "checkbox" ng-model = "todo.complete" ng-change = "updateTask(todo._links.self.href, todo.task, todo.complete)"</td>
+      <td>{{todo.complete}}</td>
+      <td><button ng-click = "deleteTask(todo._links.self.href)">Delete Task</button></td> 
+      <td><button ng-click = "updateTask(todo._links.self.href, todo.task, todo.complete)">Update Task</button></td>
+      <!-- <td>{{todo._links.self.href}}</td> -->
+    </tr>
+  </table>
+
+  </div>
+</body>
+</html>

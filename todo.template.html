@@ -1,0 +1,5 @@
+    <tr ng-repeat = "todo in todos|falseOnly: showComplete|orderBy: 'task'">
+      <td>{{todo.task}}</td>
+      <td><input type = "checkbox" ng-model = "todo.completed"</td>
+      <td>{{todo.completed}}</td>
+    </tr>
